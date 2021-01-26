@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adlfrontend
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: adlfrontend
+  template:
+    metadata:
+      labels:
+        app: adlfrontend
+    spec:
+      containers:
+        - name: adlfrontend
+          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:latest
+          ports:
+            - name: http
+              containerPort: 82
+      imagePullSecrets:
+        - name: dockreg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adlfrontend
+  namespace: default
+  labels:
+    app: adlfrontend
+spec:
+  selector:
+    app: adlfrontend
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      name: http
+      port: 82
+      targetPort: 80

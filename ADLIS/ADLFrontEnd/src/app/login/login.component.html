@@ -1,0 +1,18 @@
+<!-- Login -->
+<div *ngIf="registryWindowVisible == false" id="login">
+    <input type="text" placeholder="Benutzername" [(ngModel)]="userName" (change)="checkData()">
+    <input type="password" placeholder="Password" [(ngModel)]="userPassword" (change)="checkData()">
+    <button (click)="login()" class="loginButton" [routerLink]="correctData ? '/overview' : null">Login</button>
+    <button *ngIf="succes == false" (click)="startRegistry()" class="registryButton">Registrieren</button>
+    <button *ngIf="succes" (click)="succesWarning()" class="succesButton">Erfolgreich!</button>
+
+</div>
+<p *ngIf="warningVisible">Falsche Login Daten</p>
+<p *ngIf="succesWarningVisible">Du hast dich bereits erfolgreich Registriert! Jetzt einfach anmelden.</p>
+
+<!-- Registrieren -->
+<div *ngIf="registryWindowVisible" id="registrieren">
+    <input type="text" placeholder="Benutzername" [(ngModel)]="newName" >
+    <input type="password" placeholder="Password" [(ngModel)]="newPassword">
+    <button (click)="registry()" class="loginButton">Bestätigen</button>
+</div>

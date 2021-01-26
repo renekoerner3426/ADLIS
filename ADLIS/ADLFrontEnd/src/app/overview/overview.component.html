@@ -1,0 +1,86 @@
+<!-- Main Content -->
+<div class="window">
+    <div class="welcomeDiv">
+        <p>Willkommen im ALDIS! Überwachen Sie Ihre Autodaten.</p>
+    </div>
+
+    <!-- ADL -->
+    <div class="tableDiv">
+
+        <!-- ADL table -->
+        <div *ngIf="adlRecords.length > 0; else elseBlock">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>GPS</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.gps }}</td>
+                    </tr>
+                    <tr>
+                        <th>Gurtstraffungen</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.electromotiveBeltTensionings }}</td>
+                    </tr>
+                    <tr>
+                        <th>Beleuchtung</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.vehicleIlluminationHours }}</td>
+                    </tr>
+                    <tr>
+                        <th>Km</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.km }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tank</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.fuelPercentage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Reifendruck</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.tirePressure }}</td>
+                    </tr>
+                    <tr>
+                        <th>Kühlmittel</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.refrigerantPercentage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Bremsflüssigkeit</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.brakefluidPercentage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Wischwasser</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.screenWashPercentage }}</td>
+                    </tr>
+                    <tr>
+                        <th>Autobahn</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.kmHighway }}</td>
+                    </tr>
+                    <tr>
+                        <th>Landstraße</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.kmRoad }}</td>
+                    </tr>
+                    <tr>
+                        <th>Stadt</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.kmCity }}</td>
+                    </tr>
+                    <tr>
+                        <th>°C</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.temperatureCelsius }}</td>
+                    </tr>
+                    <tr>
+                        <th>Fahrersitzverstellungen (el.)</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.elektricSeatAdjustments }}</td>
+                    </tr>
+                    <tr>
+                        <th>Disc-Wechsler</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.cdSwap }}</td>
+                    </tr>
+                    <tr>
+                        <th>Batteriezyklen</th>
+                        <td *ngFor="let adlRecord of adlRecords; let i = index" class="column{{i}}">{{ adlRecord.chargeCycles }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <ng-template #elseBlock>
+        <p class="noDataText">Ooops! Es konnten keine Einträge gefunden werden...</p>
+    </ng-template>
+
+</div>
