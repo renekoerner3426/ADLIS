@@ -3,7 +3,14 @@
 .header {
     padding: 10px;
     text-align: center;
-    background: #20607e;
+    background: #00354d;
+    color: #f0f1f2;
+}
+
+.nav {
+    padding: 2px;
+    text-align: left;
+    background: #004666 ;
     color: #f0f1f2;
 }
 
