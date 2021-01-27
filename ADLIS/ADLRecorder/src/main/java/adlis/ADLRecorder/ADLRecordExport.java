@@ -1,4 +1,4 @@
-package main;
+package main.java.adlis.ADLRecorder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
