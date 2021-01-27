@@ -16,26 +16,9 @@ spec:
     spec:
       containers:
         - name: adlrecorder
-          image: f73-g2.cloudogu.net/achilles/adlrecorder
+          image: f73-g1.cloudogu.net/nexus/hektor/adlrecorder:latest
           ports:
             - name: http
               containerPort: 8080
       imagePullSecrets:
-        - name: regcred
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: adlrecorder
-  namespace: default
-  labels:
-    app: adlrecorder
-spec:
-  selector:
-    app: adlrecorder
-  type: ClusterIP
-  ports:
-    - protocol: TCP
-      name: http
-      port: 8080
-      targetPort: 8080
+        - name: dockreg

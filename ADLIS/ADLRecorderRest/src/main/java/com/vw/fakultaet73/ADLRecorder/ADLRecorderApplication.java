@@ -21,7 +21,7 @@ public class ADLRecorderApplication {
 
 	private static void postADLRecord() {
 		try {
-			URI POST_URL = new URI("http://localhost:8082/newDecree");
+			URI POST_URL = new URI("http://34.72.176.97:8081/adl-api/v1/saveADL");
 			RestTemplate restTemplate = new RestTemplate();
 			// restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
 			// restTemplate.getMessageConverters().add(0, new
@@ -29,8 +29,7 @@ public class ADLRecorderApplication {
 			HttpEntity<ADLRecord> adlRecord = new HttpEntity<>(new ADLRecordGenerator().generateADLRecord(), null);
 			restTemplate.postForObject(POST_URL, adlRecord, ADLRecord.class);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
+			System.out.println("Falsche URI");
 		} catch (RestClientException e) {
 			System.out.println("Keine richtige Antwort erhalten");
 		}

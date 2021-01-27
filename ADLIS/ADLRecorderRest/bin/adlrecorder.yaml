@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: verordnungen-data-service
+  name: adlrecorder
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: verordnungen-data-service
+      app: adlrecorder
   template:
     metadata:
       labels:
-        app: verordnungen-data-service
+        app: adlrecorder
     spec:
       containers:
-        - name: verordnungen-data-service
-          image: f73-g2.cloudogu.net/achilles/verordnungen-data
+        - name: adlrecorder
+          image: f73-g2.cloudogu.net/achilles/adlrecorder
           ports:
             - name: http
               containerPort: 8080
@@ -26,13 +26,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: verordnungen-data-service
+  name: adlrecorder
   namespace: default
   labels:
-    app: verordnungen-data-service
+    app: adlrecorder
 spec:
   selector:
-    app: verordnungen-data-service
+    app: adlrecorder
   type: ClusterIP
   ports:
     - protocol: TCP
