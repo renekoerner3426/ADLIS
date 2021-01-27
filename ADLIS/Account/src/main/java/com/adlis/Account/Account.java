@@ -3,6 +3,7 @@ package com.adlis.Account;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Chris Froemling
@@ -10,6 +11,7 @@ import javax.persistence.Id;
  * AccountEntity
  */
 @Entity
+@Table(name = "Account")
 public class Account {
 	
 	@Id
