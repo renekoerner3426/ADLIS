@@ -1,4 +1,4 @@
-package main;
+package main.java.adlis.ADLRecorder;
 
 public class ADLRecorderApplication {
 

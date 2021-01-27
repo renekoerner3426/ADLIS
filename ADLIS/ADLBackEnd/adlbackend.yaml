@@ -24,31 +24,31 @@ spec:
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: adlis-secret
+                  name: adlis-mongo-secret
                   key: username
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: adlis-secret
+                  name: adlis-mongo-secret
                   key: password
             - name: MONGO_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: adlis-secret
+                  name: adlis-mongo-secret
                   key: database
             - name: MONGO_HOST
               valueFrom:
                 secretKeyRef:
-                  name: adlis-secret
+                  name: adlis-mongo-secret
                   key: host
       imagePullSecrets:
-        - name: adlis-secret
+        - name: adlis-mongo-secret
         - name: dockreg
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: adlbackendservice
+  name: adlbackend-service
   namespace: default
   labels:
     app: adlbackend

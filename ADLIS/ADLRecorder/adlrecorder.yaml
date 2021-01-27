@@ -18,7 +18,7 @@ spec:
               containerPort: 8080
             env:
             - name: ADL_BACKEND_IP
-              value: adlbackendservice
+              value: adlbackend-service
           imagePullSecrets:
           - name: dockreg
           restartPolicy: Never
