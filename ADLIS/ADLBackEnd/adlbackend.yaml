@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adlbackend
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: adlbackend
+  template:
+    metadata:
+      labels:
+        app: adlbackend
+    spec:
+      containers:
+        - name: adlbackend
+          image: f73-g1.cloudogu.net/nexus/hektor/adlbackend:1.0
+          ports:
+            - name: http
+              containerPort: 8081
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: adlis-mongo-secret
+                  key: username
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: adlis-mongo-secret
+                  key: password
+            - name: MONGO_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: adlis-mongo-secret
+                  key: database
+            - name: MONGO_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: adlis-mongo-secret
+                  key: host
+      imagePullSecrets:
+        - name: adlis-mongo-secret
+        - name: dockreg
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adlbackend-service
+  namespace: default
+  labels:
+    app: adlbackend
+spec:
+  selector:
+    app: adlbackend
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8081
+      targetPort: 8081
