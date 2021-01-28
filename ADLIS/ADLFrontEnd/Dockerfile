@@ -3,7 +3,9 @@ FROM node:10-alpine as build-step
 RUN mkdir -p /app
 WORKDIR /app
 COPY package.json /app
+COPY .npmrc .npmrc
 RUN npm install
+RUN rm -f .npmrc
 COPY . /app
 RUN npm run build --prod
 

@@ -25,7 +25,8 @@
     placeholder="Passwort"
     description="Gewünschtes Passwort eingeben"
     pattern="[A-Za-z]{3}"
-    message="Bitte wähle ein anderes Passwort!"
+    message="Bitte wähle ein Passwort!"
+    [attr.variant]="newPassword ? 'without variant' : 'danger'"
     type="password"
  ></groupui-input>
 

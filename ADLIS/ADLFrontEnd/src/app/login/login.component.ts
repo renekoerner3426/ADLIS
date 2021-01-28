@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   notTheSame: boolean = false;
   wrongPassword: boolean = false;
   isEmpty: boolean = false;
+  missingPassword: boolean = false;
   succesWarningVisible: boolean = false;
   registryWindowVisible: boolean = false;
   succes: boolean = false;
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
 
   public registry() {
     //new user to db
-    if(this.newPassword == this.newPasswordCheck) {
+    if(this.newPassword == this.newPasswordCheck && this.newPassword != undefined && this.newName != undefined) {
       this.notTheSame = false;
       this.succes = true;
       this.registryWindowVisible = false;
