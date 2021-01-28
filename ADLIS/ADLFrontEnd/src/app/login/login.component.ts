@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PassDataService } from '../pass-data.service';
 
 @Component({
@@ -14,30 +14,42 @@ export class LoginComponent implements OnInit {
   userPassword: string ;
   newName: string;
   newPassword: string;
-  warningVisible: boolean = false;
+  newPasswordCheck: string;
+  notTheSame: boolean = false;
+  wrongPassword: boolean = false;
+  isEmpty: boolean = false;
   succesWarningVisible: boolean = false;
   registryWindowVisible: boolean = false;
   succes: boolean = false;
 
-  constructor(private ds: PassDataService) { 
+  constructor(private ds: PassDataService, private router: Router) { 
   }
 
   ngOnInit(): void {
   }
 
   public checkData() {
-    if(this.userName == "admin" && this.userPassword == "admin") {
-      this.sendData();
-      this.correctData = true;
-      return true;
+    if(this.userName == "" || this.userName == undefined ){
+      this.isEmpty = true;
     } else {
-      return false;
+      this.isEmpty = false;
+      this.userName = this.userName.toUpperCase();
+      if(this.userName == "ADMIN" && this.userPassword == "admin") {
+        this.correctData = true;
+        return true;
+      } else {
+        console.log(this.userName)
+        return false;
+      }
     }
   }
 
   public login() {
     if(!this.checkData()) {
-      this.warningVisible = true;
+      this.wrongPassword = true;
+    } else {
+      this.sendData();
+      this.router.navigateByUrl("/overview");
     }
   }
 
@@ -47,8 +59,13 @@ export class LoginComponent implements OnInit {
 
   public registry() {
     //new user to db
-    this.succes = true;
-    this.registryWindowVisible = false;
+    if(this.newPassword == this.newPasswordCheck) {
+      this.notTheSame = false;
+      this.succes = true;
+      this.registryWindowVisible = false;
+    } else {
+      this.notTheSame = true;
+    }
   }
 
   public startRegistry() {

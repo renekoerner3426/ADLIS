@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { OverviewComponent } from './overview/overview.component';
 import { environment } from 'src/environments/environment.prod';
+import { GroupUiModule } from '@sdc-wob-type-3/group-ui-angular';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { environment } from 'src/environments/environment.prod';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GroupUiModule
   ],
   providers: [
     {provide: 'ADLBackEnd-CLUSTERIP', useValue: environment.basicUrl}

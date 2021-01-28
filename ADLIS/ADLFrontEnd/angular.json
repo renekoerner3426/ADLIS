@@ -21,7 +21,12 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@sdc-wob-type-3/group-ui/dist/group-ui/assets",
+                "output": "./assets/"
+            }
             ],
             "styles": [
               "src/styles.css"
