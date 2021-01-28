@@ -1,0 +1,138 @@
+@font-face {
+  font-family: "groupui-vwag-icons-complete";
+  src: url("./fonts/iconfont/groupui-vwag-icons-complete.eot"), url("./fonts/iconfont/groupui-vwag-icons-complete.eot?#iefix-") format("embedded-opentype"), url("./fonts/iconfont/groupui-vwag-icons-complete.woff2") format("woff2"), url("./fonts/iconfont/groupui-vwag-icons-complete.woff") format("woff"), url("./fonts/iconfont/groupui-vwag-icons-complete.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GroupUi";
+  src: url("./fonts/VWAGTheSans-Regular.eot");
+  src: url("./fonts/VWAGTheSans-Regular.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheSans-Regular.woff") format("woff"), url("./fonts/VWAGTheSans-Regular.woff2") format("woff2"), url("./fonts/VWAGTheSans-Regular.svg#VWAGTheSans-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GroupUi";
+  src: url("./fonts/VWAGTheSans-Light.eot");
+  src: url("./fonts/VWAGTheSans-Light.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheSans-Light.woff") format("woff"), url("./fonts/VWAGTheSans-Light.woff2") format("woff2"), url("./fonts/VWAGTheSans-Light.svg#VWAGTheSans-Light") format("svg");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GroupUi";
+  src: url("./fonts/VWAGTheSans-Bold.eot");
+  src: url("./fonts/VWAGTheSans-Bold.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheSans-Bold.woff") format("woff"), url("./fonts/VWAGTheSans-Bold.woff2") format("woff2"), url("./fonts/VWAGTheSans-Bold.svg#VWAGTheSans-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GroupUi";
+  src: url("./fonts/VWAGTheSans-Italic.eot");
+  src: url("./fonts/VWAGTheSans-Italic.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheSans-Italic.woff") format("woff"), url("./fonts/VWAGTheSans-Italic.woff2") format("woff2"), url("./fonts/VWAGTheSans-Italic.svg#VWAGTheSans-Italic") format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "GroupUiSerif";
+  src: url("./fonts/VWAGTheAntiqua-Regular.eot");
+  src: url("./fonts/VWAGTheAntiqua-Regular.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheAntiqua-Regular.woff") format("woff"), url("./fonts/VWAGTheAntiqua-Regular.woff2") format("woff2"), url("./fonts/VWAGTheAntiqua-Regular.svg#VWAGTheAntiqua-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GroupUiSerif";
+  src: url("./fonts/VWAGTheAntiqua-Bold.eot");
+  src: url("./fonts/VWAGTheAntiqua-Bold.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheAntiqua-Bold.woff") format("woff"), url("./fonts/VWAGTheAntiqua-Bold.woff2") format("woff2"), url("./fonts/VWAGTheAntiqua-Bold.svg#VWAGTheAntiqua-Bold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "GroupUiSerif";
+  src: url("./fonts/VWAGTheAntiqua-Italic.eot");
+  src: url("./fonts/VWAGTheAntiqua-Italic.eot?#iefix") format("embedded-opentype"), url("./fonts/VWAGTheAntiqua-Italic.woff") format("woff"), url("./fonts/VWAGTheAntiqua-Italic.woff2") format("woff2"), url("./fonts/VWAGTheAntiqua-Italic.svg#VWAGTheAntiqua-Italic") format("svg");
+  font-weight: normal;
+  font-style: italic;
+}
+:root {
+  --groupui-vwag-font-family: "GroupUI", sans-serif;
+  --groupui-vwag-font-family-serif: "GroupUISerif", serif;
+  --groupui-vwag-line-height: 1.5;
+  --groupui-vwag-border-radius: 0.125rem;
+  --groupui-vwag-border-width: 0.0625rem;
+  --groupui-vwag-border: 0.0625rem solid;
+  --groupui-vwag-letter-spacing: 0.0125rem;
+  --groupui-vwag-letter-spacing-large: 0.0375rem;
+  --groupui-spacing-1: 0.125rem;
+  --groupui-spacing-2: 0.25rem;
+  --groupui-spacing-3: 0.5rem;
+  --groupui-spacing-4: 0.75rem;
+  --groupui-spacing-5: 1rem;
+  --groupui-spacing-6: 1.25rem;
+  --groupui-spacing-7: 1.5rem;
+  --groupui-spacing-8: 1.75rem;
+  --groupui-spacing-9: 2rem;
+  --groupui-spacing-10: 2.25rem;
+  --groupui-spacing-11: 2.5rem;
+  --groupui-spacing-12: 3rem;
+  --groupui-vwag-color-white: #ffffff;
+  --groupui-vwag-color-black: #000000;
+  --groupui-vwag-color-petrol-1000: #00354D;
+  --groupui-vwag-color-petrol-900: #004666;
+  --groupui-vwag-color-petrol-800-primary: #20607E;
+  --groupui-vwag-color-petrol-700: #35718E;
+  --groupui-vwag-color-petrol-600: #4A849F;
+  --groupui-vwag-color-petrol-500: #5F95AF;
+  --groupui-vwag-color-petrol-400-secondary: #80B0C8;
+  --groupui-vwag-color-petrol-300: #A4C8D8;
+  --groupui-vwag-color-petrol-200-tertiary: #C6DFE7;
+  --groupui-vwag-color-petrol-100: #EAF4F7;
+  --groupui-vwag-color-grey-1000: #1B1E1F;
+  --groupui-vwag-color-grey-900: #34393B;
+  --groupui-vwag-color-grey-800-primary: #4C5356;
+  --groupui-vwag-color-grey-700: #636A6D;
+  --groupui-vwag-color-grey-600: #7A8084;
+  --groupui-vwag-color-grey-500: #91979C;
+  --groupui-vwag-color-grey-400-secondary: #A8ADB3;
+  --groupui-vwag-color-grey-300: #CACDD2;
+  --groupui-vwag-color-grey-200-tertiary: #DFE2E6;
+  --groupui-vwag-color-grey-100: #F0F1F2;
+  --groupui-vwag-color-green-1000: #68752F;
+  --groupui-vwag-color-green-900: #7F8F3A;
+  --groupui-vwag-color-green-800-primary: #95A844;
+  --groupui-vwag-color-green-700: #A2B25B;
+  --groupui-vwag-color-green-600: #AFBD72;
+  --groupui-vwag-color-green-500: #BDC88A;
+  --groupui-vwag-color-green-400-secondary: #CAD3A1;
+  --groupui-vwag-color-green-300: #DAE1BE;
+  --groupui-vwag-color-green-200-tertiary: #EAEEDA;
+  --groupui-vwag-color-green-100: #F5F7EB;
+  --groupui-vwag-color-orange-1000: #A68200;
+  --groupui-vwag-color-orange-900: #BE9500;
+  --groupui-vwag-color-orange-800-primary: #D8AA00;
+  --groupui-vwag-color-orange-700: #DDB420;
+  --groupui-vwag-color-orange-600: #E2BF40;
+  --groupui-vwag-color-orange-500: #E6C95F;
+  --groupui-vwag-color-orange-400-secondary: #EBD47F;
+  --groupui-vwag-color-orange-300: #EFDC99;
+  --groupui-vwag-color-orange-200-tertiary: #F3E5B2;
+  --groupui-vwag-color-orange-100: #FFF7DB;
+  --groupui-vwag-color-red-1000: #5F1939;
+  --groupui-vwag-color-red-900: #801B42;
+  --groupui-vwag-color-red-800-primary: #A21E4D;
+  --groupui-vwag-color-red-700: #AA325C;
+  --groupui-vwag-color-red-600: #B2466B;
+  --groupui-vwag-color-red-500: #BA5A79;
+  --groupui-vwag-color-red-400-secondary: #C26D88;
+  --groupui-vwag-color-red-300: #D69DAF;
+  --groupui-vwag-color-red-200-tertiary: #EBCED7;
+  --groupui-vwag-color-red-100: #F7EBEF;
+  --groupui-vwag-color-signal-green-1000: #46752F;
+  --groupui-vwag-color-signal-green-900: #558F3A;
+  --groupui-vwag-color-signal-green-800-primary: #64A844;
+  --groupui-vwag-color-signal-orange-1000: #BF7400;
+  --groupui-vwag-color-signal-orange-900: #E3B91F;
+  --groupui-vwag-color-signal-orange-800-primary: #FCCD22;
+  --groupui-vwag-color-signal-red-1000: #800712;
+  --groupui-vwag-color-signal-red-900: #A60918;
+  --groupui-vwag-color-signal-red-800-primary: #DA0C1F;
+}
