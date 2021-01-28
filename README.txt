@@ -36,3 +36,10 @@ tar xvzf postgresql-10.2.5.tgz
 cd postgresql
 -> comment in and edit username, password, database in value.yaml to values saved in the secret for postgresql
 helm install postgresql postgresql
+
+7. secrets
+8. backend und accountservice
+
+9. frontend
+
+10. recorder

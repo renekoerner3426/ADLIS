@@ -21,7 +21,7 @@ public class ADLRecorderApplication {
 
 	private static void postADLRecord() {
 		try {
-			URI POST_URL = new URI("http://34.72.176.97:8081/adl-api/v1/saveADL");
+			URI POST_URL = new URI("http://" + System.getenv("ADL_BACKEND_IP") + ":8081/adl-api/v1/saveADL");
 			RestTemplate restTemplate = new RestTemplate();
 			// restTemplate.setErrorHandler(new RestTemplateResponseErrorHandler());
 			// restTemplate.getMessageConverters().add(0, new
