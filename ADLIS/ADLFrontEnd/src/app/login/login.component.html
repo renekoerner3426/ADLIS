@@ -8,7 +8,7 @@
 
 <!-- Registrieren -->
 <div *ngIf="registryWindowVisible" id="registry">
-<groupui-input 
+    <div class="margin"><groupui-input 
     ngDefaultControl [(ngModel)]="newName"
     label="Benutzername"
     placeholder="WVWZZZ1KZDP045466"
@@ -16,21 +16,22 @@
     maxLength="17"
     pattern="[A-Za-z]{3}"
     text-transform="uppercase"
-    message="Dieser Name ist bereits vergeben!"
-></groupui-input>
+    message="Bitte gebe einen Benutzernamen ein!"
+    [attr.variant]="newNameError ? 'danger' : 'without variant'"
+></groupui-input></div>
 
-<groupui-input
+    <div class="margin"><groupui-input
     ngDefaultControl [(ngModel)]="newPassword"
     label="Passwort"
     placeholder="Passwort"
     description="Gewünschtes Passwort eingeben"
     pattern="[A-Za-z]{3}"
     message="Bitte wähle ein Passwort!"
-    [attr.variant]="newPassword ? 'without variant' : 'danger'"
+    [attr.variant]="newPasswordError ? 'danger' : 'without variant'"
     type="password"
- ></groupui-input>
+    ></groupui-input></div>
 
- <groupui-input
+    <div class="margin"><groupui-input
     ngDefaultControl [(ngModel)]="newPasswordCheck"
     label="Passwort erneut eingeben"
     placeholder="Passwort"
@@ -39,7 +40,8 @@
     message="Die Passwörter stimmen nicht überein!"
     [attr.variant]="notTheSame ? 'danger' : 'without variant'"
     type="password"
- ></groupui-input>
+    class="margin"
+    ></groupui-input></div>
 
-    <groupui-button size="l" (click)="registry()" class="loginButton heightfix">Bestätigen</groupui-button>
+    <div class="margin center"><groupui-button size="l" (click)="registry()" class="loginButton heightfix">Bestätigen</groupui-button></div>
 </div>

@@ -6,24 +6,25 @@
     margin: 50px;
 }
 
-registry {
+#registry {
     display: block;
-    align-items: center;
+    margin: 0 auto;
     max-width: 100%;
     min-height: 300px;
     margin: 50px;
-    margin-left: auto;
-    margin: auto;
+}
+
+.margin {
+    margin-top: var(--groupui-spacing-4);
+}
+
+.center {
+    text-align: center;
 }
 
 .heightfix { 
-    /*bitte genau so fuers sdc stehen lassen 
-
-    + striped table (browserproblem?)
-    + ngDefaultControl [(ngModel)]="userName"   <-- 2 way data binding für values... in die readme?     */
     max-height: 50px;
     margin: 22px 1px 22px 1px;
-    background-color: #558f3a;
 }
 
 a {

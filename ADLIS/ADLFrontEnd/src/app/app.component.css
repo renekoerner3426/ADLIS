@@ -4,11 +4,18 @@
 }
 
 .header {
+    display: flex;
     padding: 10px;
-    text-align: center;
     background: var(--groupui-vwag-color-petrol-1000);
     color: var(--groupui-vwag-color-white);
+    text-align: center;
 }
+
+.center {
+    width: 100%;
+    text-align: center;
+}
+
 
 .nav {
     padding: 2px;

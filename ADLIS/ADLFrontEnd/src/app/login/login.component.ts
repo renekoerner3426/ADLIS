@@ -13,12 +13,14 @@ export class LoginComponent implements OnInit {
   userName: string;
   userPassword: string ;
   newName: string;
+  newNameError: boolean = false;
   newPassword: string;
   newPasswordCheck: string;
+  newPasswordError: boolean = false;
   notTheSame: boolean = false;
   wrongPassword: boolean = false;
   isEmpty: boolean = false;
-  missingPassword: boolean = false;
+  missingName: boolean = false;
   succesWarningVisible: boolean = false;
   registryWindowVisible: boolean = false;
   succes: boolean = false;
@@ -39,7 +41,6 @@ export class LoginComponent implements OnInit {
         this.correctData = true;
         return true;
       } else {
-        console.log(this.userName)
         return false;
       }
     }
@@ -60,13 +61,25 @@ export class LoginComponent implements OnInit {
 
   public registry() {
     //new user to db
-    if(this.newPassword == this.newPasswordCheck && this.newPassword != undefined && this.newName != undefined) {
+    if (this.newName == undefined) {
+      this.newNameError = true;
+    } else {
+      this.newNameError = false;
+    }
+    if (this.newPassword != this.newPasswordCheck) {
+      this.notTheSame = true;
+    } else {
       this.notTheSame = false;
+    }
+    if (this.newPassword == undefined) {
+      this.newPasswordError = true;
+    } else {
+      this.newPasswordError = false;
+    }
+    if(this.newPassword == this.newPasswordCheck && this.newPassword != undefined && this.newName != undefined) {
       this.succes = true;
       this.registryWindowVisible = false;
-    } else {
-      this.notTheSame = true;
-    }
+    }  
   }
 
   public startRegistry() {
