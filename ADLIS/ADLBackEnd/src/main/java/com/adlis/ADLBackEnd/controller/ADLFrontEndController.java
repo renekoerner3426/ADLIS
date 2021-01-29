@@ -15,6 +15,7 @@ import com.adlis.ADLBackEnd.services.ADLRecordService;
 
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/adl-api/v1")
 public class ADLFrontEndController {
 
@@ -26,7 +27,5 @@ public class ADLFrontEndController {
 	@ResponseStatus(HttpStatus.OK)
 	public List<ADLRecord> getAdlRecords() {
 		return this.adlRecordService.getRecordList();
-		
-		
 	}
 }

@@ -16,33 +16,47 @@ spec:
     spec:
       containers:
         - name: adlbackend
-          image: f73-g1.cloudogu.net/nexus/hektor/adlbackend:1.0
+          image: f73-g1.cloudogu.net/nexus/hektor/adlbackend:1.3
           ports:
             - name: http
               containerPort: 8081
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8081
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 5
           env:
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: adlis-mongo-secret
-                  key: username
+                  name: mongosecret
+                  key: MONGO_USERNAME
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: adlis-mongo-secret
-                  key: password
+                  name: mongosecret
+                  key: MONGO_PASSWORD
             - name: MONGO_DATABASE
               valueFrom:
                 secretKeyRef:
-                  name: adlis-mongo-secret
-                  key: database
+                  name: mongosecret
+                  key: MONGO_DATABASE
             - name: MONGO_HOST
               valueFrom:
                 secretKeyRef:
-                  name: adlis-mongo-secret
-                  key: host
+                  name: mongosecret
+                  key: MONGO_HOST
       imagePullSecrets:
-        - name: adlis-mongo-secret
+        - name: mongosecret
         - name: dockreg
 ---
 apiVersion: v1
@@ -55,7 +69,7 @@ metadata:
 spec:
   selector:
     app: adlbackend
-  type: ClusterIP
+  type: NodePort
   ports:
     - protocol: TCP
       name: http

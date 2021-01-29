@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
+    nginx.ingress.kubernetes.io/cors-allow-origin: "http://"
+    nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+spec:
+  rules:
+  - host: 
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: adlfrontend-service
+          servicePort: 80
+      - path: /adl-api/v1/*
+        backend:
+          serviceName: adlbackend-service
+          servicePort: 8081
+      - path: /account/*
+        backend:
+          serviceName: account-service
+          servicePort: 8083
+
+          

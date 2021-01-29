@@ -34,7 +34,7 @@ export class OverviewComponent implements OnInit {
   constructor(@Inject('ADLBackEnd-CLUSTERIP') private basicUrl: string, private http: HttpClient) {
   }
 
-  getADLRecordUrl = "http://" + this.basicUrl + ":8081/adl-api/v1/retrieveADLByFin";
+  getADLRecordUrl = "http://" + this.basicUrl + "/adl-api/v1/adlRecords";
 
   //Import
   failedImport: boolean = false;

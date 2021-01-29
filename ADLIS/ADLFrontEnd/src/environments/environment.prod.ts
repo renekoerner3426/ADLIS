@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  basicUrl : '${ADLBackEnd-CLUSTERIP}'
+  basicUrl : '34.117.105.183'
 };

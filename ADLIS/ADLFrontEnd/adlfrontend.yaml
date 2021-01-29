@@ -16,10 +16,10 @@ spec:
     spec:
       containers:
         - name: adlfrontend
-          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:1.0
+          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:1.12
           ports:
             - name: http
-              containerPort: 82
+              containerPort: 80
       imagePullSecrets:
         - name: dockreg
 ---
@@ -33,9 +33,9 @@ metadata:
 spec:
   selector:
     app: adlfrontend
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       name: http
-      port: 82
+      port: 80
       targetPort: 80

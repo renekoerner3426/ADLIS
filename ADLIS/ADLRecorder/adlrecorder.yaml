@@ -11,11 +11,7 @@ spec:
         spec:
           containers:
           - name: adlrecorder
-<<<<<<< HEAD
             image: f73-g1.cloudogu.net/nexus/hektor/adlrecorder:1.4
-=======
-            image: f73-g1.cloudogu.net/nexus/hektor/adlrecorder:1.0
->>>>>>> b319b814b2c18d77e5a26ff19459498efbacaf20
             ports:
             - name: http
               containerPort: 8080
