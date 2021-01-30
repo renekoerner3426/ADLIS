@@ -1,0 +1,218 @@
+openapi: 3.0.1
+info:
+  title: ADLIS
+  description: This is the API documentation for ADLIS. Made by René Körner and Chris
+    Frömling"
+  contact:
+    email: chris.froemling@vokswagen.de
+  version: 1.0.0
+externalDocs:
+  description: Group-Ui
+  url: https://brandportal.man/d/e1wxOsAphP6K
+servers:
+- url: https://adlis/*
+- url: http://adlis/*
+tags:
+- name: adl
+  description: ""
+- name: account
+paths:
+  /adl-api/v1/saveADL:
+    post:
+      tags:
+      - adl
+      summary: Add a new adl-record to the databse
+      operationId: addADLRecord
+      requestBody:
+        description: Adl object that needs to be added to the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ADLRecord'
+        required: true
+      responses:
+        201:
+          description: Successful
+          content: {}
+        500:
+          description: Server Error
+          content: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+      x-codegen-request-body-name: body
+  /adl-api/v1/adlRecords:
+    get:
+      tags:
+      - adl
+      summary: all adl records
+      description: Returns an array of all adl-records
+      operationId: adlRecords
+      responses:
+        200:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ADLRecord'
+        500:
+          description: Server Error
+          content: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /adl-api/v1/retrieveADLByFin/{FIN}:
+    get:
+      tags:
+      - adl
+      summary: returns all ADLrecords for the given FIN
+      description: Returns an array of all ADLRecords for the given FIN
+      operationId: getADLByFin
+      parameters:
+      - name: FIN
+        in: path
+        description: FIN of the ADLRecord which needs to be pulled
+        required: true
+        schema:
+          type: string
+          format: 17chars
+      responses:
+        200:
+          description: Succesful
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ADLRecord'
+        500:
+          description: Server Error
+          content: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets
+  /account/new:
+    post:
+      tags:
+      - account
+      summary: Add a new account to the databse
+      operationId: addAccountRecord
+      requestBody:
+        description: Adl object that needs to be added to the database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        201:
+          description: Successful
+          content: {}
+        500:
+          description: Server Error
+          content: {}
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets:
+  /account/login:
+   post:
+      tags:
+      - account
+      summary: login request
+      operationId: login
+      requestBody:
+        description: answer 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Account'
+        required: true
+      responses:
+        201:
+          description: Successful
+          content:
+            application/json:
+              schema:
+                type: boolean
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: boolean
+                default: false
+      security:
+      - petstore_auth:
+        - write:pets
+        - read:pets:
+components:
+  schemas:
+    ADLRecord:
+      type: object
+      properties:
+        fin:
+          type: string
+          format: 17chars
+        gps:
+          type: string
+          format: decimal degrees
+        electromotiveBeltTensionings:
+          type: integer
+        vehicleIlluminationHours:
+          type: integer
+          format: int32
+        km:
+          type: integer
+        fuelPercentage:
+          type: integer
+        tirePressure:
+          type: number
+        refrigerantPercentage:
+          type: integer
+        brakefluidPercentage:
+          type: integer
+        screenWashPercentage:
+          type: integer
+        kmHighway;:
+          type: integer
+        kmRoad:
+          type: integer
+        kmCity:
+          type: integer
+        temperatureCelsius:
+          type: integer
+        elektricSeatAdjustments:
+          type: integer
+        cdSwap:
+          type: integer
+        chargeCycles:
+          type: integer
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: http://petstore.swagger.io/oauth/dialog
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
