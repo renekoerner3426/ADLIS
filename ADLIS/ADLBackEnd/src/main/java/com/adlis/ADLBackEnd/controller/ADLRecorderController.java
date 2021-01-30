@@ -2,7 +2,6 @@ package com.adlis.ADLBackEnd.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +18,13 @@ public class ADLRecorderController {
 	@Autowired
 	private ADLRecordService adlRecordService;
 
-	@CrossOrigin("*")
+	@Autowired
+	LoggingController loggingController;
+
 	@PostMapping("/saveADL")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ADLRecord createAdlRecord(@RequestBody ADLRecord adlRecord) {
+		this.loggingController.logger.info("new ADLRecord saved!");
 		return this.adlRecordService.saveRecord(adlRecord);
 	}
 }

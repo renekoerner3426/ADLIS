@@ -26,4 +26,11 @@ public class ADLRecordService {
 		savedEntitys.forEach(savedEntity -> recordList.add(savedEntity));
 		return recordList;
 	}
+
+	public List<ADLRecord> getRecordListByFin(String fin) {
+        Iterable<ADLRecord> savedEntitys = this.adlRecordRepository.findByFin(fin);
+        List<ADLRecord> recordList = new ArrayList<>();
+        savedEntitys.forEach(savedEntity -> recordList.add(savedEntity));
+        return recordList;
+    }
 }		

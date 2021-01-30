@@ -31,4 +31,12 @@ public class ADLFrontEndControllerTests {
 	    		.accept(MediaType.APPLICATION_JSON))
 	    		.andExpect(MockMvcResultMatchers.status().is(200));
 	}
+	
+	@Test
+	public void sendTheCorrectResponseForRetrieveADLByFin() throws Exception {
+	    this.mvc.perform( MockMvcRequestBuilders
+	    		.get("/adl-api/v1/retrieveADLByFin/FHDKFFD")
+	    		.accept(MediaType.APPLICATION_JSON))
+	    		.andExpect(MockMvcResultMatchers.status().is(200));
+	}
 }
