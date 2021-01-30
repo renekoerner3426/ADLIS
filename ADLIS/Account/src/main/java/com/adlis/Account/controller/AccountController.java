@@ -13,6 +13,7 @@ import com.adlis.Account.Account;
 import com.adlis.Account.AccountService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/account")
 public class AccountController {
 
@@ -33,6 +34,7 @@ public class AccountController {
 	}
 
 	@PostMapping("/login")
+	@CrossOrigin("*")
 	@ResponseStatus(HttpStatus.OK)
 	public boolean checkLogin(@RequestBody Account account) {
 		boolean loggedIn = this.accountService.checkLoginData(account);
