@@ -26,6 +26,7 @@ public class AccountController {
 	@CrossOrigin("*")
 	@ResponseStatus(HttpStatus.CREATED)
 	public boolean newAccount(@RequestBody Account account) {
+
 		System.out.println(this.accountService.save(account));
 		this.loggingController.logger.info("new Account created!");
 		return true;
@@ -40,7 +41,6 @@ public class AccountController {
 		} else {
 			this.loggingController.logger.info("somebody failed to log in!");
 		}
-
 		return loggedIn;
 	}
 

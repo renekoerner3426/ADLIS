@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
       this.isEmpty = false;
       this.userName = this.userName.toUpperCase();
       this.loginCheck();
-      if(this.userName == "ADMIN" && this.userPassword == "admin" || this.correctLoginData) {
+      if((this.userName == "ADMIN" && this.userPassword == "admin") || this.correctLoginData) {
         this.correctData = true;
         return true;
       } else {
@@ -54,26 +54,30 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  test: Account;
-
+ 
+  
   public loginCheck() {
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/login", this.test).subscribe(({
+    var account: Account;
+    console.log("name:" + this.userName + " pw:" + this.userPassword)
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName, password: this.userPassword}).subscribe(({
     error: error => console.error('login() - could not use login', error),
     next: data => {
+      console.log(data)
       this.correctLoginData = data;
      }
     }));
   }
 
   public newAccount() {
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", this.test).subscribe(({
+    var account: Account;
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}).subscribe(({
     error: error => console.error('new() - could not create new Account', error),
     next: data => {
+      console.log(this.newName)
       this.succes = data;
      }
     }));
   }
-
 
   public login() {
     if(!this.checkData()) {
