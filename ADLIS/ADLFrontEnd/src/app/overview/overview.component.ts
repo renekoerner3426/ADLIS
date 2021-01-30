@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { PassDataService } from '../pass-data.service';
+
 
 interface ADLRecord {
   fin: string;
@@ -29,12 +31,12 @@ interface ADLRecord {
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
+  subscription: Subscription;
 
-
-  constructor(@Inject('ADLBackEnd-CLUSTERIP') private basicUrl: string, private http: HttpClient) {
+  constructor(@Inject('ADLBackEnd-CLUSTERIP') private basicUrl: string, private http: HttpClient, private ds: PassDataService) {
   }
 
-  getADLRecordUrl = "http://" + this.basicUrl + "/adl-api/v1/adlRecords";
+  recordUrl: string;
 
   //Import
   failedImport: boolean = false;
@@ -57,21 +59,20 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getADLRecords();
-    this.getFin();
+  }
+
+  private getADLRecordUrl() {
+    this.recordUrl = this.ds.getFinString() == "ADMIN" ? "http://" + this.basicUrl + "/adl-api/v1/adlRecords" : "http://" + this.basicUrl + "/adl-api/v1/retrieveADLByFin/" + this.ds.getFinString();
   }
 
   public getADLRecords() {
-    this.http.get<ADLRecord[]>(this.getADLRecordUrl).subscribe(({
+    this.getADLRecordUrl();
+    this.http.get<ADLRecord[]>(this.recordUrl).subscribe(({
     error: error => console.error('getADLRecords() - could not use ADLBackEnd', error),
     next: data => data.forEach(element => {
       this.adlRecords.push(element);
       console.log(element);
     })
     }));
-   // this.adlRecords = this.adlRecords.filter((element, i) => i === this.adlRecords.indexOf(element))
-  }
-
-  private getFin() {
-    this.fin = this.adlRecords[0].fin;
   }
 }

@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PassDataService } from '../pass-data.service';
+import { HttpClient } from '@angular/common/http';
+
+interface Account {
+  fin: string,
+  password: string
+}
 
 @Component({
   selector: 'app-login',
@@ -24,8 +30,9 @@ export class LoginComponent implements OnInit {
   succesWarningVisible: boolean = false;
   registryWindowVisible: boolean = false;
   succes: boolean = false;
+  correctLoginData: boolean = false; 
 
-  constructor(private ds: PassDataService, private router: Router) { 
+  constructor(@Inject('ACCOUNT-CLUSTERIP') private accountUrl: string, private ds: PassDataService, private router: Router, private http: HttpClient) { 
   }
 
   ngOnInit(): void {
@@ -37,7 +44,8 @@ export class LoginComponent implements OnInit {
     } else {
       this.isEmpty = false;
       this.userName = this.userName.toUpperCase();
-      if(this.userName == "ADMIN" && this.userPassword == "admin") {
+      this.loginCheck();
+      if(this.userName == "ADMIN" && this.userPassword == "admin" || this.correctLoginData) {
         this.correctData = true;
         return true;
       } else {
@@ -45,6 +53,27 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+
+  test: Account;
+
+  public loginCheck() {
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/login", this.test).subscribe(({
+    error: error => console.error('login() - could not use login', error),
+    next: data => {
+      this.correctLoginData = data;
+     }
+    }));
+  }
+
+  public newAccount() {
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", this.test).subscribe(({
+    error: error => console.error('new() - could not create new Account', error),
+    next: data => {
+      this.succes = data;
+     }
+    }));
+  }
+
 
   public login() {
     if(!this.checkData()) {
@@ -77,7 +106,8 @@ export class LoginComponent implements OnInit {
       this.newPasswordError = false;
     }
     if(this.newPassword == this.newPasswordCheck && this.newPassword != undefined && this.newName != undefined) {
-      this.succes = true;
+      this.newAccount();
+      //implementieren
       this.registryWindowVisible = false;
     }  
   }

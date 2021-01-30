@@ -7,6 +7,10 @@ select {
     display: block;
 }
 
+.tableDiv {
+    overflow-x: scroll;
+}
+
 .noDataText {
     text-align: center;
     font-weight: bold;

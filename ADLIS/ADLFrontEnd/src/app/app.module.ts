@@ -24,7 +24,8 @@ import { GroupUiModule } from '@sdc-wob-type-3/group-ui-angular';
     GroupUiModule
   ],
   providers: [
-    {provide: 'ADLBackEnd-CLUSTERIP', useValue: environment.basicUrl}
+    {provide: 'ADLBackEnd-CLUSTERIP', useValue: environment.basicUrl},
+    {provide: 'ACCOUNT-CLUSTERIP', useValue: environment.accountUrl}
   ],
   bootstrap: [AppComponent]
 })
