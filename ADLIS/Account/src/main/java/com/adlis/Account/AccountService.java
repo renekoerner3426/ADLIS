@@ -10,12 +10,12 @@ public class AccountService {
 
 	@Autowired
 	private AccountRepository accountRepository;
-	
+
 	public boolean checkLoginData(Account account) {
-		Optional<Account> acc = this.accountRepository.findById(account.getFin());		
-		return acc != null ? account.getPassword() == acc.get().getPassword() ? true : false : false;
+		Optional<Account> acc = this.accountRepository.findByFin(account.getFin());
+		return acc != null ? account.getPassword().equals(acc.get().getPassword()) ? true : false : false;
 	}
-	
+
 	public Account save(Account account) {
 		return this.accountRepository.save(account);
 	}
