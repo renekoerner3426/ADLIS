@@ -54,18 +54,14 @@ export class LoginComponent implements OnInit {
     }
   }
 
- 
-  
-  public loginCheck() {
+  public async loginCheck() {
     var account: Account;
-    console.log("name:" + this.userName + " pw:" + this.userPassword)
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName, password: this.userPassword}).subscribe(({
-    error: error => console.error('login() - could not use login', error),
-    next: data => {
-      console.log(data)
+    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName, password: this.userPassword}).toPromise();
+    promise.then((data) => {
       this.correctLoginData = data;
-     }
-    }));
+    }).catch((error) => {
+      console.error('login() - could not use login', error)
+    });
   }
 
   public newAccount() {
@@ -80,7 +76,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    if(!this.checkData()) {
+    if(!this.checkData) {
       this.wrongPassword = true;
     } else {
       this.sendData();

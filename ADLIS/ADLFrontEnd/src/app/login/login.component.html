@@ -1,7 +1,7 @@
 <!-- Login -->
 <div *ngIf="registryWindowVisible == false" id="login">
-    <groupui-input [attr.variant]="isEmpty ? 'danger' : 'without variant'" label="Benutzername" (change)="checkData()" ngDefaultControl [(ngModel)]="userName" placeholder="WVWZZZ1KZDP045466" description="Bitte Fin eingeben!" immutable="false" maxLength="17" text-transform="uppercase" message="Bitte Benutzername eintragen!" type="text"></groupui-input>
-    <groupui-input [attr.variant]="wrongPassword ? 'danger' : 'without variant'" label="Passwort" ngDefaultControl [(ngModel)]="userPassword" (change)="checkData()" placeholder="Geheim!" message="Falsches Passwort" variant="without variant" type="password"> </groupui-input>
+    <groupui-input [attr.variant]="isEmpty ? 'danger' : 'without variant'" label="Benutzername" ngDefaultControl [(ngModel)]="userName" placeholder="WVWZZZ1KZDP045466" description="Bitte Fin eingeben!" immutable="false" maxLength="17" text-transform="uppercase" message="Bitte Benutzername eintragen!" type="text"></groupui-input>
+    <groupui-input [attr.variant]="wrongPassword ? 'danger' : 'without variant'" label="Passwort" ngDefaultControl [(ngModel)]="userPassword" placeholder="Geheim!" message="Falsches Passwort" variant="without variant" type="password"> </groupui-input>
     <groupui-button size="l" (click)="login()" class="loginButton heightfix">Login</groupui-button> 
     <groupui-button size="l" [attr.disabled]="succes ? 'true' : false" (click)="startRegistry()" class="registryButton heightfix">Registrieren</groupui-button> 
 </div>
