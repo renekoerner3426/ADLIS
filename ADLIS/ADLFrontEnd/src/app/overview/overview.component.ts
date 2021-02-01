@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { PassDataService } from '../pass-data.service';
 
 
@@ -24,16 +24,20 @@ interface ADLRecord {
   chargeCycles: number;
 }
 
-
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.css']
 })
+
 export class OverviewComponent implements OnInit {
   subscription: Subscription;
+  httpHeaders: HttpHeaders;
 
   constructor(@Inject('ADLBackEnd-CLUSTERIP') private basicUrl: string, private http: HttpClient, private ds: PassDataService) {
+    this.httpHeaders = new HttpHeaders({
+    'Content-Type':'application/json',
+    'Authorization':'Basic ' + btoa('admin:admin')});
   }
 
   recordUrl: string;
@@ -67,7 +71,7 @@ export class OverviewComponent implements OnInit {
 
   public getADLRecords() {
     this.getADLRecordUrl();
-    this.http.get<ADLRecord[]>(this.recordUrl).subscribe(({
+    this.http.get<ADLRecord[]>(this.recordUrl, {observe: 'body', headers: this.httpHeaders}, ).subscribe(({
     error: error => console.error('getADLRecords() - could not use ADLBackEnd', error),
     next: data => data.forEach(element => {
       this.adlRecords.push(element);

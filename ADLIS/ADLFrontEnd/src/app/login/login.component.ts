@@ -13,8 +13,8 @@ interface Account {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
 
+export class LoginComponent implements OnInit {
   correctData: boolean = false;
   userName: string;
   userPassword: string ;
@@ -31,21 +31,16 @@ export class LoginComponent implements OnInit {
   registryWindowVisible: boolean = false;
   succes: boolean = false;
   correctLoginData: boolean = false; 
-  httpOptions;
+  httpHeaders: HttpHeaders;
 
   constructor(@Inject('ACCOUNT-CLUSTERIP') private accountUrl: string, private ds: PassDataService, private router: Router, private http: HttpClient) { 
-    this.httpOptions = { 
-      headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'Basic ' + btoa('admin:admin'),
-      'Access-Control-Allow-Origin':'*'
-    })
-  };
+    this.httpHeaders = new HttpHeaders({
+      'Content-Type':'application/json',
+      'Authorization':'Basic ' + btoa('admin:admin')});
   }
 
   ngOnInit(): void {
   }
-
   
   public checkData() {
     if(this.userName == "" || this.userName == undefined ){
@@ -65,9 +60,9 @@ export class LoginComponent implements OnInit {
 
   public async loginCheck() {
     var account: Account;
-    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}, this.httpOptions).toPromise();
+    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}, {observe: 'body', headers: this.httpHeaders}).toPromise();
     promise.then((data) => {
-      //console.log(data.type.toString);
+      this.correctLoginData = data;
     }).catch((error) => {
       console.error('login() - could not use login', error);
     });
@@ -75,11 +70,10 @@ export class LoginComponent implements OnInit {
 
   public newAccount() {
     var account: Account;
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}, this.httpOptions).subscribe(({
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}, {observe: 'body', headers: this.httpHeaders}).subscribe(({
     error: error => console.error('new() - could not create new Account', error),
     next: data => {
-      console.log(this.newName)
-      
+      this.succes = data;
      }
     }));
   }
