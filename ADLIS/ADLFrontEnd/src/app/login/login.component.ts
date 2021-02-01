@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PassDataService } from '../pass-data.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 interface Account {
   fin: string,
@@ -31,13 +31,24 @@ export class LoginComponent implements OnInit {
   registryWindowVisible: boolean = false;
   succes: boolean = false;
   correctLoginData: boolean = false; 
+  httpOptions;
 
   constructor(@Inject('ACCOUNT-CLUSTERIP') private accountUrl: string, private ds: PassDataService, private router: Router, private http: HttpClient) { 
+    this.httpOptions = { 
+      headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'Basic ' + btoa('admin:admin'),
+      'Access-Control-Allow-Origin':'*',
+      'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+    })
+  };
   }
 
   ngOnInit(): void {
   }
 
+  
   public checkData() {
     if(this.userName == "" || this.userName == undefined ){
       this.isEmpty = true;
@@ -56,12 +67,13 @@ export class LoginComponent implements OnInit {
 
   public async loginCheck() {
     var account: Account;
-    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName, password: this.userPassword}).toPromise();
-    promise.then((data) => {
-      this.correctLoginData = data;
-    }).catch((error) => {
-      console.error('login() - could not use login', error)
-    });
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}).subscribe(({
+    error: error => console.error('new() - could not create new Account', error),
+    next: data => {
+      console.log(this.newName)
+      this.succes = data;
+     }
+    }));
   }
 
   public newAccount() {
