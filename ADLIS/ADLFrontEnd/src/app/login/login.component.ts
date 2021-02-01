@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
 
   public async loginCheck() {
     var account: Account;
-    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}).toPromise();
+    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}, this.httpOptions).toPromise();
     promise.then((data) => {
       //console.log(data.type.toString);
     }).catch((error) => {
