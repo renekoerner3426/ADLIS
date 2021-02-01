@@ -38,9 +38,7 @@ export class LoginComponent implements OnInit {
       headers: new HttpHeaders({
       'Content-Type':  'application/json',
       'Authorization': 'Basic ' + btoa('admin:admin'),
-      'Access-Control-Allow-Origin':'*',
-      'Access-Control-Allow-Methods' : 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+      'Access-Control-Allow-Origin':'*'
     })
   };
   }
@@ -67,22 +65,21 @@ export class LoginComponent implements OnInit {
 
   public async loginCheck() {
     var account: Account;
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}).subscribe(({
-    error: error => console.error('new() - could not create new Account', error),
-    next: data => {
-      console.log(this.newName)
-      this.succes = data;
-     }
-    }));
+    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}, this.httpOptions).toPromise();
+    promise.then((data) => {
+      console.log(data.type.toString);
+    }).catch((error) => {
+      console.error('login() - could not use login', error);
+    });
   }
 
   public newAccount() {
     var account: Account;
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}).subscribe(({
+    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}, this.httpOptions).subscribe(({
     error: error => console.error('new() - could not create new Account', error),
     next: data => {
       console.log(this.newName)
-      this.succes = data;
+      
      }
     }));
   }
