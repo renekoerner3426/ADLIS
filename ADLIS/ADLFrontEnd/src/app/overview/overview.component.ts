@@ -34,8 +34,7 @@ export class OverviewComponent implements OnInit {
   subscription: Subscription;
 
   constructor(@Inject('CLUSTERIP') private basicUrl: string,
-             @Inject('ADMIN_USER') private adminUser: string, 
-             @Inject('ADMIN_PASSWORD') private adminPassword: string, 
+             @Inject('ADMIN_USER') private adminUser: string,  
              private http: HttpClient, private ds: PassDataService) {
   }
 

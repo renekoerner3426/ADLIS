@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.adlis.Account;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,5 +10,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().httpBasic();
 	}
-
 }
