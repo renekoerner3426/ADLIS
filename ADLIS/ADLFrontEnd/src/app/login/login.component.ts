@@ -65,9 +65,9 @@ export class LoginComponent implements OnInit {
 
   public async loginCheck() {
     var account: Account;
-    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}, this.httpOptions).toPromise();
+    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}).toPromise();
     promise.then((data) => {
-      console.log(data.type.toString);
+      //console.log(data.type.toString);
     }).catch((error) => {
       console.error('login() - could not use login', error);
     });
@@ -126,6 +126,6 @@ export class LoginComponent implements OnInit {
   }
 
   sendData(){
-    this.ds.sendFin(this.userName);
+    this.ds.sendFin(this.userName.toUpperCase());
   }
 }
