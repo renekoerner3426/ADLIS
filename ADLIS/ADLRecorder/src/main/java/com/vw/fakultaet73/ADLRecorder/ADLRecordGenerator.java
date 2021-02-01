@@ -3,8 +3,8 @@ package com.vw.fakultaet73.ADLRecorder;
 import java.util.Random;
 
 public class ADLRecordGenerator {
-	private String fin = "WVWZZZ1JZ3W386752";
-	private String gps = "placeholder";
+	private String fin;
+	private String gps;
 	private int electromotiveBeltTensionings;
 	private int vehicleIlluminationHours;
 	private int km;
@@ -25,7 +25,7 @@ public class ADLRecordGenerator {
 	public ADLRecordGenerator() {
 	}
 
-	public ADLRecord generateADLRecord() {
+	public ADLRecord generateADLRecord(String fin) {
 		this.number = new Random();
 
 		this.kmHighway = this.number.nextInt(200000);
@@ -35,7 +35,7 @@ public class ADLRecordGenerator {
 
 		this.createGpsCoordinates();
 
-		ADLRecord generatedADLRecord = new ADLRecord(this.fin, this.gps,
+		ADLRecord generatedADLRecord = new ADLRecord(fin, this.gps,
 				this.electromotiveBeltTensionings = this.number.nextInt(12001),
 				this.vehicleIlluminationHours = this.number.nextInt(18001), this.km,
 				this.fuelPercentage = this.number.nextInt(101), this.tirePressure = (1 + this.number.nextInt(30)) / 10,

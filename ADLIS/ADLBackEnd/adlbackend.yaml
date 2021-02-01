@@ -69,7 +69,7 @@ metadata:
 spec:
   selector:
     app: adlbackend
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       name: http

@@ -27,10 +27,14 @@ public class AccountController {
 	@CrossOrigin("*")
 	@ResponseStatus(HttpStatus.CREATED)
 	public boolean newAccount(@RequestBody Account account) {
-
-		System.out.println(this.accountService.save(account));
-		this.loggingController.logger.info("new Account created!");
-		return true;
+		if(this.accountService.checkAccountExistence(account)) {
+			this.loggingController.logger.info("somebody tried to create an account already existing!");
+			return false;
+		} else {
+			this.accountService.save(account);
+			this.loggingController.logger.info("new Account created!");
+			return true;	
+		}
 	}
 
 	@PostMapping("/login")

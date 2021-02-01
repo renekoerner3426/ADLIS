@@ -33,7 +33,10 @@ interface ADLRecord {
 export class OverviewComponent implements OnInit {
   subscription: Subscription;
 
-  constructor(@Inject('ADLBackEnd-CLUSTERIP') private basicUrl: string, private http: HttpClient, private ds: PassDataService) {
+  constructor(@Inject('CLUSTERIP') private basicUrl: string,
+             @Inject('ADMIN_USER') private adminUser: string, 
+             @Inject('ADMIN_PASSWORD') private adminPassword: string, 
+             private http: HttpClient, private ds: PassDataService) {
   }
 
   recordUrl: string;
@@ -62,7 +65,7 @@ export class OverviewComponent implements OnInit {
   }
 
   private getADLRecordUrl() {
-    this.recordUrl = this.ds.getFinString() == "ADMIN" ? "http://" + this.basicUrl + "/adl-api/v1/adlRecords" : "http://" + this.basicUrl + "/adl-api/v1/retrieveADLByFin/" + this.ds.getFinString();
+    this.recordUrl = this.ds.getFinString() == this.adminUser ? "http://" + this.basicUrl + "/adl-api/v1/adlRecords" : "http://" + this.basicUrl + "/adl-api/v1/retrieveADLByFin/" + this.ds.getFinString();
   }
 
   public getADLRecords() {

@@ -32,7 +32,10 @@ export class LoginComponent implements OnInit {
   succes: boolean = false;
   correctLoginData: boolean = false; 
 
-  constructor(@Inject('ACCOUNT-CLUSTERIP') private accountUrl: string, private ds: PassDataService, private router: Router, private http: HttpClient) { 
+  constructor(@Inject('CLUSTERIP') private basicUrl: string, 
+              @Inject('ADMIN_USER') private adminUser: string, 
+              @Inject('ADMIN_PASSWORD') private adminPassword: string,
+              private ds: PassDataService, private router: Router, private http: HttpClient) { 
   }
 
   ngOnInit(): void {
@@ -45,7 +48,7 @@ export class LoginComponent implements OnInit {
       this.isEmpty = false;
       this.userName = this.userName.toUpperCase();
       this.loginCheck();
-      if((this.userName == "ADMIN" && this.userPassword == "admin") || this.correctLoginData) {
+      if((this.userName == this.adminUser && this.userPassword == this.adminPassword) || this.correctLoginData) {
         this.correctData = true;
         return true;
       } else {
@@ -56,7 +59,7 @@ export class LoginComponent implements OnInit {
 
   public async loginCheck() {
     var account: Account;
-    const promise = this.http.post<boolean>("http://" + this.accountUrl + "/account/login", account = {fin: this.userName, password: this.userPassword}).toPromise();
+    const promise = this.http.post<boolean>("http://" + this.basicUrl + "/account/login", account = {fin: this.userName, password: this.userPassword}).toPromise();
     promise.then((data) => {
       this.correctLoginData = data;
     }).catch((error) => {
@@ -66,7 +69,7 @@ export class LoginComponent implements OnInit {
 
   public newAccount() {
     var account: Account;
-    this.http.post<boolean>("http://" + this.accountUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}).subscribe(({
+    this.http.post<boolean>("http://" + this.basicUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}).subscribe(({
     error: error => console.error('new() - could not create new Account', error),
     next: data => {
       console.log(this.newName)

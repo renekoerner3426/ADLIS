@@ -43,14 +43,14 @@ kubectl apply -f mongoSecret.yaml
 kubectl apply -f postgresqlSecret.yaml
 kubectl create secret docker-registry dockreg --docker-server={dockerRepository} --docker-username={username} --docker-password={password}
 
-8. backend  
+8. backend  (lauffähiges image: adlbackend:1.6)
 cd ~/home/project/hektor/ADLIS/ADLBackend
 docker build -t adlbackend:{version} .
 docker tag adlbackend:{version} {dockerRepository}/adlbackend:{version}
 docker push {dockerRepository}/adlbackend:{version}
 kubectl apply -f adlbackend.yaml
 
-9. account
+9. account (lauffähiges image: account:1.0)
 cd ~/home/project/hektor/ADLIS/Account
 docker build -t account:{version} .
 docker tag account:{version} {dockerRepository}/account:{version}
@@ -63,7 +63,7 @@ kubectl apply -f ingress.yaml
 
 -> externe IP des ingress muss als environment Variable noch im Frontend eingepflegt werden
 
-11. frontend
+11. frontend (lauffähiges image: adlfrontend:1.0)
 -> externe IP des Ingress
 -> ADLIS/ADLFrontend/src/environments/environment.prod.ts
 
@@ -76,7 +76,7 @@ kubectl apply -f adlfrontend.yaml
 wenn build fehlschlägt, bitte eine mail an chris.froemling@volkswagen.de, da der temporäre accesstoken zum group-ui-github veraltet sein könnte
 ADLIS/ADLFrontend/.npmrc -> neuen accessToken einpflegen
 
-12. recorder
+12. recorder (lauffähiges image: adlrecorder:1.0)
 cd ~/home/project/hektor/ADLIS/Recorder
 docker build -t recorder:{version} .
 docker tag recorder:{version} {dockerRepository}/recorder:{version}

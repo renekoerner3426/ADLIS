@@ -19,4 +19,9 @@ public class AccountService {
 	public Account save(Account account) {
 		return this.accountRepository.save(account);
 	}
+	
+	public boolean checkAccountExistence(Account account) {
+		Optional<Account> acc = this.accountRepository.findByFin(account.getFin());
+		return acc != null;
+	}
 }

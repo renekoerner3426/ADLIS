@@ -24,8 +24,9 @@ import { GroupUiModule } from '@sdc-wob-type-3/group-ui-angular';
     GroupUiModule
   ],
   providers: [
-    {provide: 'ADLBackEnd-CLUSTERIP', useValue: environment.basicUrl},
-    {provide: 'ACCOUNT-CLUSTERIP', useValue: environment.accountUrl}
+    {provide: 'CLUSTERIP', useValue: environment.basicUrl},
+    {provide: 'ADMIN_USER', useValue: environment.adminuser},
+    {provide: 'ADMIN_PASSWORD', useValue: environment.adminpassword}
   ],
   bootstrap: [AppComponent]
 })

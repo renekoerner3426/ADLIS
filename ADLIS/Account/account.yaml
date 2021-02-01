@@ -69,7 +69,7 @@ metadata:
 spec:
   selector:
     app: account
-  type: LoadBalancer
+  type: NodePort
   ports:
     - protocol: TCP
       name: http
