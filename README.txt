@@ -38,8 +38,67 @@ cd postgresql
 helm install postgresql postgresql
 
 7. secrets
-8. backend und accountservice
+cd ~/home/project/hektor/ADLIS
+kubectl apply -f mongoSecret.yaml
+kubectl apply -f postgresqlSecret.yaml
+kubectl create secret docker-registry dockreg --docker-server={dockerRepository} --docker-username={username} --docker-password={password}
 
-9. frontend
+8. backend  
+cd ~/home/project/hektor/ADLIS/ADLBackend
+docker build -t adlbackend:{version} .
+docker tag adlbackend:{version} {dockerRepository}/adlbackend:{version}
+docker push {dockerRepository}/adlbackend:{version}
+kubectl apply -f adlbackend.yaml
 
-10. recorder
+9. account
+cd ~/home/project/hektor/ADLIS/Account
+docker build -t account:{version} .
+docker tag account:{version} {dockerRepository}/account:{version}
+docker push {dockerRepository}/account:{version}
+kubectl apply -f account.yaml
+
+10. ingress
+cd ~/home/project/hektor/ADLIS
+kubectl apply -f ingress.yaml
+
+-> externe IP des ingress muss als environment Variable noch im Frontend eingepflegt werden
+
+11. frontend
+-> externe IP des Ingress
+-> ADLIS/ADLFrontend/src/environments/environment.prod.ts
+
+cd ~/home/project/hektor/ADLIS/ADLFrontend
+docker build -t frontend:{version} .
+docker tag frontend:{version} {dockerRepository}/frontend:{version}
+docker push {dockerRepository}/frontend:{version}
+kubectl apply -f adlfrontend.yaml
+
+wenn build fehlschlägt, bitte eine mail an chris.froemling@volkswagen.de, da der temporäre accesstoken zum group-ui-github veraltet sein könnte
+ADLIS/ADLFrontend/.npmrc -> neuen accessToken einpflegen
+
+12. recorder
+cd ~/home/project/hektor/ADLIS/Recorder
+docker build -t recorder:{version} .
+docker tag recorder:{version} {dockerRepository}/recorder:{version}
+docker push {dockerRepository}/recorder:{version}
+kubectl apply -f adlrecorder.yaml
+__________________________________________________
+
+Sobald alles hochgefahren ist, steht die Benutzeroberfläche zur Anwendung bereit.
+
+Es werden Daten für folgende Fin's produziert, bei denen bei einer Registrierung Daten eingesehen werden können.
+
+WVWZZZ1JZ3W386752
+WVWABC1JZ3W324523
+WVWZKL5TG0W365465
+WVWSDF1CP3W456646
+WVWDTK1JZ3W198834
+WVWZOB1JZ3W553532
+WVWDRH1JZ3W164931
+WVWDUT1JZ3W897456
+WVWJUL1JZ3W123568
+WVWSER1JZ3W786541
+
+
+
+
