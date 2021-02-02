@@ -77,7 +77,6 @@ export class OverviewComponent implements OnInit {
   }
 
   private getADLRecordUrlTimeslotted() {
-    console.log(this.timeslot)
     this.recordUrl = this.ds.getFinString() == this.adminUser ? "http://" + this.basicUrl + "/adl-api/v1/adlRecords" : "http://" + this.basicUrl + "/adl-api/v1/retrieveADLByFin/" + this.ds.getFinString() + "/" + this.timeslot;
   }
 
@@ -87,18 +86,17 @@ export class OverviewComponent implements OnInit {
     error: error => console.error('getADLRecords() - could not use ADLBackEnd', error),
     next: data => data.forEach(element => {
       this.adlRecords.push(element);
-      console.log(element);
     })
     }));
   }
 
   public getADLRecordsTimeslotted() {
+    this.adlRecords=[];
     this.getADLRecordUrlTimeslotted();
     this.http.get<ADLRecord[]>(this.recordUrl, {observe: 'body', headers: this.httpHeaders}, ).subscribe(({
     error: error => console.error('getADLRecords() - could not use ADLBackEnd', error),
     next: data => data.forEach(element => {
       this.adlRecords.push(element);
-      console.log(element);
     })
     }));
   }
