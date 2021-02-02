@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: account
-          image: f73-g1.cloudogu.net/nexus/hektor/account:2.17
+          image: f73-g1.cloudogu.net/nexus/hektor/account:2.21
           ports:
             - name: http
               containerPort: 8083
@@ -55,14 +55,25 @@ spec:
                 secretKeyRef:
                   name: adlis-postgresql-secret
                   key: host
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: adminsecret
+                  key: USERNAME
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: adminsecret
+                  key: PASSWORD
       imagePullSecrets:
         - name: adlis-postgresl-secret
         - name: dockreg
+        - name: adminsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: account-service
+  name: accountservice
   namespace: default
   labels:
     app: account

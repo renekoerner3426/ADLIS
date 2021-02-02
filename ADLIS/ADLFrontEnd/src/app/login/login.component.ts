@@ -36,10 +36,12 @@ export class LoginComponent implements OnInit {
   constructor(@Inject('CLUSTERIP') private basicUrl: string,
               @Inject('ADMIN_USER') private adminUser: string,
               @Inject('ADMIN_PASSWORD') private adminPassword: string,
+              @Inject('BACKEND_USER') private backenduser: string,
+              @Inject('BACKEND_PASSWORD') private backendPassword: string,
               private ds: PassDataService, private router: Router, private http: HttpClient) {
     this.httpHeaders = new HttpHeaders({
       'Content-Type':'application/json',
-      'Authorization':'Basic ' + btoa('admin:admin')});
+      'Authorization':'Basic ' + btoa(backenduser + ':' + backendPassword)});
   }
 
   ngOnInit(): void {

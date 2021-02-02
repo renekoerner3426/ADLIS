@@ -11,13 +11,24 @@ spec:
         spec:
           containers:
           - name: adlrecorder
-            image: f73-g1.cloudogu.net/nexus/hektor/adlrecorder:2.14
+            image: f73-g1.cloudogu.net/nexus/hektor/adlrecorder:2.23
             ports:
             - name: http
               containerPort: 8080
             env:
             - name: ADL_BACKEND_IP
-              value: adlbackend-service
+              value: adlbackendservice
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: adminsecret
+                  key: USERNAME
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: adminsecret
+                  key: PASSWORD
           imagePullSecrets:
           - name: dockreg
+          - name: adminsecret
           restartPolicy: Never

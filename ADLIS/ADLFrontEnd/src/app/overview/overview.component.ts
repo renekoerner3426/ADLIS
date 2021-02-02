@@ -35,11 +35,13 @@ export class OverviewComponent implements OnInit {
   httpHeaders: HttpHeaders;
 
   constructor(@Inject('CLUSTERIP') private basicUrl: string,
-             @Inject('ADMIN_USER') private adminUser: string,  
+             @Inject('ADMIN_USER') private adminUser: string,
+              @Inject('BACKEND_USER') private backenduser: string,
+              @Inject('BACKEND_PASSWORD') private backendPassword: string,
              private http: HttpClient, private ds: PassDataService) {
     this.httpHeaders = new HttpHeaders({
     'Content-Type':'application/json',
-    'Authorization':'Basic ' + btoa('admin:admin')});
+    'Authorization':'Basic ' + btoa(backenduser + ':' + backendPassword)});
   }
 
   recordUrl: string;

@@ -26,7 +26,9 @@ import { GroupUiModule } from '@sdc-wob-type-3/group-ui-angular';
   providers: [
     {provide: 'CLUSTERIP', useValue: environment.basicUrl},
     {provide: 'ADMIN_USER', useValue: environment.adminuser},
-    {provide: 'ADMIN_PASSWORD', useValue: environment.adminpassword}
+    {provide: 'ADMIN_PASSWORD', useValue: environment.adminpassword},
+    {provide: 'BACKEND_USER', useValue: environment.backenduser},
+    {provide: 'BACKEND_PASSWORD', useValue: environment.backendPassword}
   ],
   bootstrap: [AppComponent]
 })
