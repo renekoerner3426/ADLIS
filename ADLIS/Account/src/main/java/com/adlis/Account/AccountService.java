@@ -12,8 +12,8 @@ public class AccountService {
 	private AccountRepository accountRepository;
 
 	public boolean checkLoginData(Account account) {
-		Optional<Account> acc = this.accountRepository.findByFin(account.getFin());
-		return acc != null ? account.getPassword().equals(acc.get().getPassword()) ? true : false : false;
+        Optional<Account> acc = this.accountRepository.findByFin(account.getFin());
+		return acc.isPresent() ? account.getPassword().equals(acc.get().getPassword()) ? true : false : false;
 	}
 
 	public Account save(Account account) {
@@ -22,6 +22,6 @@ public class AccountService {
 	
 	public boolean checkAccountExistence(Account account) {
 		Optional<Account> acc = this.accountRepository.findByFin(account.getFin());
-		return acc != null;
+		return  acc.isPresent();
 	}
 }

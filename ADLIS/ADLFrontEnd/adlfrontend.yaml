@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: adlfrontend
-          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:1.0
+          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:2.14
           ports:
             - name: http
               containerPort: 80

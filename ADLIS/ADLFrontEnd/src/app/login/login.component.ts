@@ -30,13 +30,13 @@ export class LoginComponent implements OnInit {
   succesWarningVisible: boolean = false;
   registryWindowVisible: boolean = false;
   succes: boolean = false;
-  correctLoginData: boolean = false; 
+  correctLoginData: boolean = false;
   httpHeaders: HttpHeaders;
 
-  constructor(@Inject('CLUSTERIP') private basicUrl: string, 
-              @Inject('ADMIN_USER') private adminUser: string, 
+  constructor(@Inject('CLUSTERIP') private basicUrl: string,
+              @Inject('ADMIN_USER') private adminUser: string,
               @Inject('ADMIN_PASSWORD') private adminPassword: string,
-              private ds: PassDataService, private router: Router, private http: HttpClient) { 
+              private ds: PassDataService, private router: Router, private http: HttpClient) {
     this.httpHeaders = new HttpHeaders({
       'Content-Type':'application/json',
       'Authorization':'Basic ' + btoa('admin:admin')});
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   public checkData() {
     if(this.userName == "" || this.userName == undefined ){
       this.isEmpty = true;
@@ -65,16 +65,17 @@ export class LoginComponent implements OnInit {
     var account: Account;
     const promise = this.http.post<boolean>("http://" + this.basicUrl + "/account/login", account = {fin: this.userName.toUpperCase(), password: this.userPassword}, {observe: 'body', headers: this.httpHeaders}).toPromise();
     promise.then((data) => {
+      console.log(data);
       this.correctLoginData = data;
     }).catch((error) => {
-      console.error('login() - could not use login', error);
+      console.error('login() - could not use /login', error);
     });
   }
 
   public newAccount() {
     var account: Account;
     this.http.post<boolean>("http://" + this.basicUrl + "/account/new", account = {fin: this.newName.toUpperCase(), password: this.newPassword}, {observe: 'body', headers: this.httpHeaders}).subscribe(({
-    error: error => console.error('new() - could not create new Account', error),
+    error: error => console.error('new() - could not use /new', error),
     next: data => {
       this.succes = data;
      }
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    if(!this.checkData) {
+    if(!this.checkData()) {
       this.wrongPassword = true;
     } else {
       this.sendData();
@@ -115,7 +116,7 @@ export class LoginComponent implements OnInit {
       this.newAccount();
       //implementieren
       this.registryWindowVisible = false;
-    }  
+    }
   }
 
   public startRegistry() {

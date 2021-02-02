@@ -41,7 +41,9 @@ public class AccountController {
 	@CrossOrigin("*")
 	@ResponseStatus(HttpStatus.OK)
 	public boolean checkLogin(@RequestBody Account account) {
-		boolean loggedIn = this.accountService.checkLoginData(account);
+        System.out.println("fdddddddddddddddddddddddddddddddddddddAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        boolean loggedIn = this.accountService.checkLoginData(account);
+        System.out.println("LOGGEDIN:" + loggedIn);
 		if (loggedIn) {
 			this.loggingController.logger.info("somebody just logged in!");
 		} else {

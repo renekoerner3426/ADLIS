@@ -56,7 +56,7 @@ public class ADLRecordGenerator {
 		double latitude = this.generateCoordinate(-90, 90);
 		double longitude = this.generateCoordinate(-180, 180);
 
-		this.gps = "" + latitude + "," + longitude;
+		this.gps = "" + latitude + ", " + longitude;
 	}
 
 	private double generateCoordinate(int rangeMin, int rangeMax) {
