@@ -1,6 +1,5 @@
 package com.adlis.ADLBackEnd.entities;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -10,9 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class ADLRecord {
 
-	//@Id
+	// @Id
 	private String fin;
-	
+
 	private String gps;
 	private int electromotiveBeltTensionings;
 	private int vehicleIlluminationHours;
@@ -29,6 +28,7 @@ public class ADLRecord {
 	private int elektricSeatAdjustments;
 	private int cdSwap;
 	private int chargeCycles;
+	private String creationDateString;
 
 	public ADLRecord(String fin, String gps, int electromotiveBeltTensionings, int vehicleIlluminationHours, int km,
 			int fuelPercentage, double tirePressure, int refrigerantPercentage, int brakefluidPercentage,
@@ -192,6 +192,14 @@ public class ADLRecord {
 
 	public void setChargeCycles(int chargeCycles) {
 		this.chargeCycles = chargeCycles;
+	}
+
+	public String getCreationDateString() {
+		return this.creationDateString;
+	}
+
+	public void setCreationDateString(String creationDateString) {
+		this.creationDateString = creationDateString;
 	}
 
 }

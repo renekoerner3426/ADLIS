@@ -1,5 +1,6 @@
 package com.vw.fakultaet73.ADLRecorder;
 
+import java.time.LocalDateTime;
 import java.util.Random;
 
 public class ADLRecordGenerator {
@@ -44,7 +45,7 @@ public class ADLRecordGenerator {
 				this.screenWashPercentage = this.number.nextInt(101), this.kmHighway, this.kmRoad, this.kmCity,
 				this.temperatureCelsius = this.number.nextInt(160),
 				this.elektricSeatAdjustments = this.number.nextInt(401), this.cdSwap = this.number.nextInt(501),
-				this.chargeCycles = this.number.nextInt(10001));
+				this.chargeCycles = this.number.nextInt(10001), "" + LocalDateTime.now());
 
 		return generatedADLRecord;
 	}
@@ -65,12 +66,12 @@ public class ADLRecordGenerator {
 	}
 
 	private double nDecimalNumbers(double coordinate, int nDecimal) {
-		String decimalValue = "1";
+		StringBuilder decimalValue = new StringBuilder("1");
 		for (int i = 0; i < nDecimal; i++) {
-			decimalValue += "0";
+			decimalValue.append("0");
 		}
 
-		double decimalNumber = Double.parseDouble(decimalValue);
+		double decimalNumber = Double.parseDouble(decimalValue.toString());
 		return (Math.round(coordinate * decimalNumber)) / decimalNumber;
 	}
 }

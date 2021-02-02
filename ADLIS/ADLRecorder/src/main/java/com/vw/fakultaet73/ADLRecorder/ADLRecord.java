@@ -6,8 +6,9 @@ package com.vw.fakultaet73.ADLRecorder;
 
 public class ADLRecord {
 
-	/* private Long id = 0L; */
+	// @Id
 	private String fin;
+
 	private String gps;
 	private int electromotiveBeltTensionings;
 	private int vehicleIlluminationHours;
@@ -24,11 +25,12 @@ public class ADLRecord {
 	private int elektricSeatAdjustments;
 	private int cdSwap;
 	private int chargeCycles;
+	private String creationDateString;
 
 	public ADLRecord(String fin, String gps, int electromotiveBeltTensionings, int vehicleIlluminationHours, int km,
 			int fuelPercentage, double tirePressure, int refrigerantPercentage, int brakefluidPercentage,
 			int screenWashPercentage, int kmHighway, int kmRoad, int kmCity, int temperatureCelsius,
-			int elektricSeatAdjustments, int cdSwap, int chargeCycles) {
+			int elektricSeatAdjustments, int cdSwap, int chargeCycles, String creationDateString) {
 		super();
 		this.fin = fin;
 		this.gps = gps;
@@ -47,6 +49,7 @@ public class ADLRecord {
 		this.elektricSeatAdjustments = elektricSeatAdjustments;
 		this.cdSwap = cdSwap;
 		this.chargeCycles = chargeCycles;
+		this.creationDateString = creationDateString;
 	}
 
 	public ADLRecord() {
@@ -189,16 +192,12 @@ public class ADLRecord {
 		this.chargeCycles = chargeCycles;
 	}
 
-	@Override
-	public String toString() {
-		return "ADLRecord [fin=" + this.fin + ", gps=" + this.gps + ", electromotiveBeltTensionings="
-				+ this.electromotiveBeltTensionings + ", vehicleIlluminationHours=" + this.vehicleIlluminationHours
-				+ ", km=" + this.km + ", fuelPercentage=" + this.fuelPercentage + ", tirePressure=" + this.tirePressure
-				+ ", refrigerantPercentage=" + this.refrigerantPercentage + ", brakefluidPercentage="
-				+ this.brakefluidPercentage + ", screenWashPercentage=" + this.screenWashPercentage + ", kmHighway="
-				+ this.kmHighway + ", kmRoad=" + this.kmRoad + ", kmCity=" + this.kmCity + ", temperatureCelsius="
-				+ this.temperatureCelsius + ", elektricSeatAdjustments=" + this.elektricSeatAdjustments + ", cdSwap="
-				+ this.cdSwap + ", chargeCycles=" + this.chargeCycles + "]";
+	public String getCreationDateString() {
+		return this.creationDateString;
+	}
+
+	public void setCreationDateString(String creationDateString) {
+		this.creationDateString = creationDateString;
 	}
 
 }
