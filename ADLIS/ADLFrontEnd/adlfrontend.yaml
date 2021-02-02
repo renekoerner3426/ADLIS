@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: adlfrontend
-          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:2.14
+          image: f73-g1.cloudogu.net/nexus/hektor/adlfrontend:2.21
           ports:
             - name: http
               containerPort: 80
@@ -26,7 +26,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: adlfrontend-service
+  name: adlfrontendservice
   namespace: default
   labels:
     app: adlfrontend

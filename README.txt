@@ -43,14 +43,14 @@ kubectl apply -f mongoSecret.yaml
 kubectl apply -f postgresqlSecret.yaml
 kubectl create secret docker-registry dockreg --docker-server={dockerRepository} --docker-username={username} --docker-password={password}
 
-8. backend  (lauffähiges image: adlbackend:1.6)
+8. backend  (lauffï¿½higes image: adlbackend:1.6)
 cd ~/home/project/hektor/ADLIS/ADLBackend
 docker build -t adlbackend:{version} .
 docker tag adlbackend:{version} {dockerRepository}/adlbackend:{version}
 docker push {dockerRepository}/adlbackend:{version}
 kubectl apply -f adlbackend.yaml
 
-9. account (lauffähiges image: account:1.0)
+9. account (lauffï¿½higes image: account:1.0)
 cd ~/home/project/hektor/ADLIS/Account
 docker build -t account:{version} .
 docker tag account:{version} {dockerRepository}/account:{version}
@@ -63,7 +63,7 @@ kubectl apply -f ingress.yaml
 
 -> externe IP des ingress muss als environment Variable noch im Frontend eingepflegt werden
 
-11. frontend (lauffähiges image: adlfrontend:1.0)
+11. frontend (lauffï¿½higes image: adlfrontend:1.0)
 -> externe IP des Ingress
 -> ADLIS/ADLFrontend/src/environments/environment.prod.ts
 
@@ -73,10 +73,10 @@ docker tag frontend:{version} {dockerRepository}/frontend:{version}
 docker push {dockerRepository}/frontend:{version}
 kubectl apply -f adlfrontend.yaml
 
-wenn build fehlschlägt, bitte eine mail an chris.froemling@volkswagen.de, da der temporäre accesstoken zum group-ui-github veraltet sein könnte
+wenn build fehlschlï¿½gt, bitte eine mail an chris.froemling@volkswagen.de, da der temporï¿½re accesstoken zum group-ui-github veraltet sein kï¿½nnte
 ADLIS/ADLFrontend/.npmrc -> neuen accessToken einpflegen
 
-12. recorder (lauffähiges image: adlrecorder:1.0)
+12. recorder (lauffï¿½higes image: adlrecorder:1.0)
 cd ~/home/project/hektor/ADLIS/Recorder
 docker build -t recorder:{version} .
 docker tag recorder:{version} {dockerRepository}/recorder:{version}
@@ -84,11 +84,11 @@ docker push {dockerRepository}/recorder:{version}
 kubectl apply -f adlrecorder.yaml
 __________________________________________________
 
-Sobald alles hochgefahren ist, steht die Benutzeroberfläche zur Anwendung bereit.
+Sobald alles hochgefahren ist, steht die Benutzeroberflï¿½che zur Anwendung bereit.
 
-Es werden Daten für folgende Fin's produziert, bei denen bei einer Registrierung Daten eingesehen werden können.
+Es werden Daten fï¿½r folgende Fin's produziert, bei denen bei einer Registrierung Daten eingesehen werden kï¿½nnen.
 
-WVWZZZ1JZ3W386752
+WVWZZZ1KZDP045466
 WVWABC1JZ3W324523
 WVWZKL5TG0W365465
 WVWSDF1CP3W456646

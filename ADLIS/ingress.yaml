@@ -9,15 +9,15 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: adlfrontend-service
+          serviceName: adlfrontendservice
           servicePort: 80
       - path: /adl-api/v1/*
         backend:
-          serviceName: adlbackend-service
+          serviceName: adlbackendservice
           servicePort: 8081
       - path: /account/*
         backend:
-          serviceName: account-service
+          serviceName: accountservice
           servicePort: 8083
 
           

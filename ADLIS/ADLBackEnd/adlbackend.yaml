@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: adlbackend
-          image: f73-g1.cloudogu.net/nexus/hektor/adlbackend:2.21
+          image: f73-g1.cloudogu.net/nexus/hektor/adlbackend:2.22
           ports:
             - name: http
               containerPort: 8081
@@ -55,14 +55,25 @@ spec:
                 secretKeyRef:
                   name: mongosecret
                   key: MONGO_HOST
+            - name: USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: adminsecret
+                  key: USERNAME
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: adminsecret
+                  key: PASSWORD
       imagePullSecrets:
         - name: mongosecret
         - name: dockreg
+        - name: adminsecret
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: adlbackend-service
+  name: adlbackendservice
   namespace: default
   labels:
     app: adlbackend
