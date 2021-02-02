@@ -27,9 +27,9 @@ public class DemoApplication {
 		System.out.println(adlRecord);
 		return adlRecord;
 	}
-	
+
 	@GetMapping("/exception/throw")
 	public void getException() throws Exception {
-	    throw new Exception("error");
+		throw new Exception("error");
 	}
 }
