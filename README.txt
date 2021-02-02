@@ -41,16 +41,17 @@ helm install postgresql postgresql
 cd ~/home/project/hektor/ADLIS
 kubectl apply -f mongoSecret.yaml
 kubectl apply -f postgresqlSecret.yaml
+kubectl apply -f adminSecret.yaml
 kubectl create secret docker-registry dockreg --docker-server={dockerRepository} --docker-username={username} --docker-password={password}
 
-8. backend  (lauff�higes image: adlbackend:1.6)
+8. backend  (lauff�higes image: adlbackend:)
 cd ~/home/project/hektor/ADLIS/ADLBackend
 docker build -t adlbackend:{version} .
 docker tag adlbackend:{version} {dockerRepository}/adlbackend:{version}
 docker push {dockerRepository}/adlbackend:{version}
 kubectl apply -f adlbackend.yaml
 
-9. account (lauff�higes image: account:1.0)
+9. account (lauff�higes image: account:)
 cd ~/home/project/hektor/ADLIS/Account
 docker build -t account:{version} .
 docker tag account:{version} {dockerRepository}/account:{version}
@@ -63,7 +64,7 @@ kubectl apply -f ingress.yaml
 
 -> externe IP des ingress muss als environment Variable noch im Frontend eingepflegt werden
 
-11. frontend (lauff�higes image: adlfrontend:1.0)
+11. frontend (lauff�higes image: adlfrontend:)
 -> externe IP des Ingress
 -> ADLIS/ADLFrontend/src/environments/environment.prod.ts
 
