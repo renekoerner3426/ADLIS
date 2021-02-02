@@ -11,6 +11,14 @@ select {
     overflow-x: scroll;
 }
 
+#timediv {
+    width: 30%;
+}
+
+groupui-dropdown {
+    width: 30%;
+}
+
 .noDataText {
     text-align: center;
     font-weight: bold;
