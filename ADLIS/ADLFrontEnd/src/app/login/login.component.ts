@@ -116,7 +116,6 @@ export class LoginComponent implements OnInit {
     }
     if(this.newPassword == this.newPasswordCheck && this.newPassword != undefined && this.newName != undefined) {
       this.newAccount();
-      //implementieren
       this.registryWindowVisible = false;
     }
   }

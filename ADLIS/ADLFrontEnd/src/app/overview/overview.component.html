@@ -3,6 +3,13 @@
     <div class="welcomeDiv">
         <p>Willkommen im ADLIS! Überwachen Sie Ihre Autodaten.</p>
     </div>
+    <div id="timediv">
+        <groupui-dropdown id="timeslot" (change)="getADLRecordsTimeslotted()" label="Zeitfenster" placeholder="Wähle aus ..." description="Vielleicht gibt es keine?" value="">
+            <groupui-dropdown-option (click)="selectValue('2')" >2 Minuten</groupui-dropdown-option>
+            <groupui-dropdown-option (click)="selectValue('4')" >4 Minuten</groupui-dropdown-option>
+            <groupui-dropdown-option (click)="selectValue('10')">10 Minuten</groupui-dropdown-option>
+        </groupui-dropdown>
+    </div>
 
     <!-- ADL -->
     <div class="tableDiv">

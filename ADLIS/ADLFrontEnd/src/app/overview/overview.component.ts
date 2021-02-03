@@ -33,6 +33,14 @@ interface ADLRecord {
 export class OverviewComponent implements OnInit {
   subscription: Subscription;
   httpHeaders: HttpHeaders;
+  recordUrl: string;
+  //Import
+  failedImport: boolean = false;
+  successfullImport: boolean = false;
+  fin: string;
+  column: string;
+  timeslot: string = "";
+
 
   constructor(@Inject('CLUSTERIP') private basicUrl: string,
              @Inject('ADMIN_USER') private adminUser: string,
@@ -43,12 +51,6 @@ export class OverviewComponent implements OnInit {
     'Content-Type':'application/json',
     'Authorization':'Basic ' + btoa(backenduser + ':' + backendPassword)});
   }
-
-  recordUrl: string;
-
-  //Import
-  failedImport: boolean = false;
-  successfullImport: boolean = false;
 
   //all
   adlRecords: ADLRecord[] = [
@@ -62,15 +64,20 @@ export class OverviewComponent implements OnInit {
     }
   ];
 
-  fin: string;
-  column: string;
-
   ngOnInit(): void {
     this.getADLRecords();
   }
 
+  public selectValue(value: string){
+    this.timeslot = value;
+  }
+
   private getADLRecordUrl() {
     this.recordUrl = this.ds.getFinString() == this.adminUser ? "http://" + this.basicUrl + "/adl-api/v1/adlRecords" : "http://" + this.basicUrl + "/adl-api/v1/retrieveADLByFin/" + this.ds.getFinString();
+  }
+
+  private getADLRecordUrlTimeslotted() {
+    this.recordUrl = this.ds.getFinString() == this.adminUser ? "http://" + this.basicUrl + "/adl-api/v1/adlRecords" : "http://" + this.basicUrl + "/adl-api/v1/retrieveADLByFin/" + this.ds.getFinString() + "/" + this.timeslot;
   }
 
   public getADLRecords() {
@@ -79,7 +86,17 @@ export class OverviewComponent implements OnInit {
     error: error => console.error('getADLRecords() - could not use ADLBackEnd', error),
     next: data => data.forEach(element => {
       this.adlRecords.push(element);
-      console.log(element);
+    })
+    }));
+  }
+
+  public getADLRecordsTimeslotted() {
+    this.adlRecords=[];
+    this.getADLRecordUrlTimeslotted();
+    this.http.get<ADLRecord[]>(this.recordUrl, {observe: 'body', headers: this.httpHeaders}, ).subscribe(({
+    error: error => console.error('getADLRecords() - could not use ADLBackEnd', error),
+    next: data => data.forEach(element => {
+      this.adlRecords.push(element);
     })
     }));
   }

@@ -41,13 +41,12 @@ public class ADLFrontEndController {
 	public List<ADLRecord> getAdlRecords(@PathVariable String fin) {
 		this.loggingController.logger.info("/retrieveADLByFin was called!");
 		return this.adlRecordService.getRecordListByFin(fin);
-
 	}
 
 	@CrossOrigin("*")
-	@GetMapping("/retrieveADLByFinTimeslotted/{fin}/{timeslot}")
+	@GetMapping("/retrieveADLByFin/{fin}/{timeslot}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<ADLRecord> getAdlRechjords(@PathVariable String fin, @PathVariable int timeslot) {
+	public List<ADLRecord> getAdlRecords(@PathVariable String fin, @PathVariable int timeslot) {
 		String actually = "" + LocalDateTime.now();
 		String[] actuallyYearAndMonth = actually.split("-");
 		String[] actuallyDayHourAndMinute = actuallyYearAndMonth[2].split(":");
